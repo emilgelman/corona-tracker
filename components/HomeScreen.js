@@ -6,7 +6,7 @@ import {Video} from "expo-av";
 
 export default class HomeScreen extends Component {
 state = {
-    value: 1
+    value: 5
 };
 
     constructor(props) {
@@ -42,7 +42,7 @@ state = {
                        <Text style={styles.text}>{this.state.value}</Text>
                        <Button
                            title="חיפוש"
-                           onPress={() => this.props.navigation.navigate('Details')}
+                           onPress={() => this.props.navigation.navigate('Details', {radius: this.state.value})}
                            titleStyle={{ fontWeight: 'bold', color: 'white', fontSize: 48 }}
                            type="outline"
                            buttonStyle={{
@@ -56,7 +56,7 @@ state = {
                                size: 48,
                                color: 'white',
                            }}
-                           iconLeft
+                           iconRight
                        />
                    </View>
             </View>

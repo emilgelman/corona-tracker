@@ -12,18 +12,20 @@ export default class DetailsScreen extends Component {
 
   constructor(props) {
     super(props);
-      this._loadData();
+    const {radius} = this.props.route.params;
+    console.log(radius);
+    this._loadData(radius);
   }
 
 
 
-  _loadData = async () => {
+  _loadData = async (radius) => {
     await resolveAddress()
         .then(address => {
           console.log(address);
           findAddress(address)
               .then(foundAddress => {
-                resolveGeometry(foundAddress)
+                resolveGeometry(foundAddress, radius)
                     .then(geometry => {
                       query(geometry)
                           .then(data => {
