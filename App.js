@@ -1,89 +1,83 @@
 import React, {Component} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {ListItem} from "react-native-elements";
-import {findAddress, resolveAddress} from "./api/AddressResolver";
-import {resolveGeometry} from "./api/GeometryResolver";
-import {formatResponse, query} from "./api/Querier";
+import {StyleSheet, View} from "react-native";
+import {Button} from 'react-native-elements';
+import {Icon} from "expo";
+import {Video} from "expo-av";
 
 export default class App extends Component {
-  state = {
-    places: []
-  };
-
-  constructor(props) {
-    super(props);
-      this._loadData();
-  }
 
 
+    constructor(props) {
+        super(props);
+    }
 
-  _loadData = async () => {
-    await resolveAddress()
-        .then(address => {
-          console.log(address);
-          findAddress(address)
-              .then(foundAddress => {
-                resolveGeometry(foundAddress)
-                    .then(geometry => {
-                      query(geometry)
-                          .then(data => {
-                            let arr = formatResponse(data);
-                            this.setState( {places: arr})
-                          })
-                    })
-              })
-        })
 
-  };
+    render() {
+        return (
+            <View style={styles.container}>
 
-  render() {
-    return (
-        <ScrollView>
-          {this.state.places.length > 0 ?
-                  this.state.places.map((l, i) => (
-                      <ListItem
-                          key={i}
-                          title={
-                            <View style={styles.titleView}>
-                              <Text style={styles.ratingText}>{l.place}</Text>
-                            </View>
-                          }
-                          subtitle={
-                            <View style={styles.titleView}>
-                              <Text style={styles.ratingText}>{l.fromDate} : {l.stayTimes}</Text>
-                            </View>
-                          }
-                          badge={{containerStyle: { position: 'absolute', paddingLeft: 5 }}}
-                          bottomDivider
-                      />
-                  ))
-              :
-              <Text>loading</Text>
-          }
-        </ScrollView>
+               <Video
+                   source={require('./assets/corona.mp4')}
+                   rate={1.0}
+                   volume={1.0}
+                   isMuted={false}
+                   resizeMode="cover"
+                   shouldPlay
+                   isLooping
+                   style={styles.backgroundVideo}
+
+               >
+               </Video>
+                   <View style={styles.loginButtonSection}>
+                       <Button
+                           title="חיפוש"
+                           titleStyle={{ fontWeight: 'bold', color: 'white', fontSize: 48 }}
+                           type="outline"
+                           buttonStyle={{
+                               borderWidth: 1,
+                               borderColor: 'white',
+                               borderRadius: 20,
+                           }}
+                           icon={{
+                               name: 'search',
+                               type: 'font-awesome',
+                               size: 48,
+                               color: 'white',
+                           }}
+                           iconLeft
+                       />
+                   </View>
+
+
+            </View>
     )
-  }
+    }
 }
 
 
-
 const styles = StyleSheet.create({
-  titleView: {
-    paddingLeft: 5,
-    paddingTop: 5,
-      flex: 1,
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
-  },
-  ratingText: {
-    paddingLeft: 5,
-    color: 'grey',
-    textAlign: 'right',
-    flex: 1
-  },
-    badge: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        container: {
+            flex: 1,
+            alignItems: 'center'
+        },
+        button: {
+            borderColor: 'white',
+            padding: 12,
+        },
+        loginButtonSection: {
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        backgroundVideo: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            alignItems: "stretch",
+            bottom: 0,
+            right: 0
+        }
     }
-});
+);
+
