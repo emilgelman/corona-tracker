@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
-import {StyleSheet, View} from "react-native";
+import {Slider, StyleSheet, Text, View} from "react-native";
 import {Button} from 'react-native-elements';
 import {Icon} from "expo";
 import {Video} from "expo-av";
 
 export default class App extends Component {
-
+state = {
+    value: 1
+};
 
     constructor(props) {
         super(props);
     }
-
 
     render() {
         return (
@@ -29,6 +30,16 @@ export default class App extends Component {
                >
                </Video>
                    <View style={styles.loginButtonSection}>
+                       <Text style={styles.text}>רדיוס:</Text>
+                       <Slider
+                           style={{ width: 300 }}
+                           step={1}
+                           minimumValue={5}
+                           maximumValue={15}
+                           value={this.state.value}
+                           onValueChange={val => this.setState({ value: val })}
+                       />
+                       <Text style={styles.text}>{this.state.value}</Text>
                        <Button
                            title="חיפוש"
                            titleStyle={{ fontWeight: 'bold', color: 'white', fontSize: 48 }}
@@ -47,8 +58,6 @@ export default class App extends Component {
                            iconLeft
                        />
                    </View>
-
-
             </View>
     )
     }
@@ -68,7 +77,8 @@ const styles = StyleSheet.create({
             width: '100%',
             height: '100%',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingTop: 300
         },
         backgroundVideo: {
             position: "absolute",
@@ -77,7 +87,10 @@ const styles = StyleSheet.create({
             alignItems: "stretch",
             bottom: 0,
             right: 0
+        },
+        text: {
+            color: 'white',
+            fontSize: 24
         }
     }
 );
-
