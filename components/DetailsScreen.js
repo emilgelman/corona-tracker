@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {ListItem} from "react-native-elements";
-import {findAddress, resolveAddress} from "./api/AddressResolver";
-import {resolveGeometry} from "./api/GeometryResolver";
-import {formatResponse, query} from "./api/Querier";
+import {findAddress, resolveAddress} from "../api/AddressResolver";
+import {resolveGeometry} from "../api/GeometryResolver";
+import {formatResponse, query} from "../api/Querier";
 
-export default class App extends Component {
+export default class DetailsScreen extends Component {
   state = {
     places: []
   };
@@ -58,7 +58,7 @@ export default class App extends Component {
                       />
                   ))
               :
-              <Text>loading</Text>
+              <Text>טוען...</Text>
           }
         </ScrollView>
     )
