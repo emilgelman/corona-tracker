@@ -13,7 +13,6 @@ export default class DetailsScreen extends Component {
   constructor(props) {
     super(props);
     const {radius} = this.props.route.params;
-    console.log(radius);
     this._loadData(radius);
   }
 
@@ -60,7 +59,7 @@ export default class DetailsScreen extends Component {
                       />
                   ))
               :
-              <Text>טוען...</Text>
+              <Text style={styles.loadingText}>טוען...</Text>
           }
         </ScrollView>
     )
@@ -83,9 +82,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     flex: 1
   },
-    badge: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+    loadingText: {
+        textAlign: 'left',
     }
 });
