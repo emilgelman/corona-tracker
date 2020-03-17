@@ -39,7 +39,7 @@ export default class DetailsScreen extends Component {
 
   render() {
     return (
-        <ScrollView>
+        <ScrollView contentContainerStyle={styles.viewStyle}>
           {this.state.places.length > 0 ?
                   this.state.places.map((l, i) => (
                       <ListItem
@@ -54,7 +54,7 @@ export default class DetailsScreen extends Component {
                               <Text style={styles.ratingText}>{l.fromDate} : {l.stayTimes}</Text>
                             </View>
                           }
-                          badge={{containerStyle: { position: 'absolute', paddingLeft: 5 }}}
+                          badge={{containerStyle: { paddingLeft: 5 }}}
                           bottomDivider
                       />
                   ))
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingTop: 5,
       flex: 1,
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
+      justifyContent: 'flex-end',
+      alignItems: 'flex-end',
   },
   ratingText: {
     paddingLeft: 5,
@@ -83,6 +83,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
     loadingText: {
-        textAlign: 'left',
+        textAlign: 'right',
+    },
+    viewStyle: {
     }
 });
